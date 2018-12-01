@@ -70,13 +70,11 @@ const generateRowColumnSpanStyles = (props: GridDivProps) =>
     .map(
       (element, index) => `
       #${childPrefix}-${index} {
-        grid-row-start: ${element.props.gridRow! + 1};
+        grid-row-start: ${element.props.gridRow!};
         grid-row-end: ${element.props.gridRow! +
-          1 +
           (element.props.gridRowSpan || 0)};
-        grid-column-start: ${element.props.gridColumn! + 1};
+        grid-column-start: ${element.props.gridColumn!};
         grid-column-end: ${element.props.gridColumn! +
-          1 +
           (element.props.gridColumnSpan || 0)};
       }
     `
