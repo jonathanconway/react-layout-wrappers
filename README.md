@@ -29,7 +29,7 @@ In React Layout, all the layout components are simply React components, so you c
 
 ## <a name="stack"></a>Stack
 <br />
-![Stack](https://i.imgur.com/Rb8COhW.png)
+<img src="https://i.imgur.com/Rb8COhW.png" alt="Stack icon" />
 
 ### Overview
 
@@ -71,7 +71,7 @@ const StackExample = () => (
 ## <a name="wrap"></a>Wrap
 
 <br />
-![Wrap](https://i.imgur.com/WXrjA52.png)
+<img src="https://i.imgur.com/WXrjA52.png" alt="Wrap icon" />
 
 ### Overview
 
@@ -117,7 +117,7 @@ const WrapExample = () => (
 ## <a name="dock"></a>Dock
 
 <br />
-![Dock](https://i.imgur.com/OZB1Qf2.png)
+<img src="https://i.imgur.com/OZB1Qf2.png" alt="Dock icon" />
 
 ### Overview
 
@@ -163,7 +163,7 @@ const HorizontalWrap = () => (
 ## <a name="grid"></a>Grid
 
 <br />
-![Grid](https://i.imgur.com/nNxRYj8.png)
+<img src="https://i.imgur.com/nNxRYj8.png" alt="Grid icon" />
 
 ### Overview
 
@@ -232,7 +232,7 @@ const GridExample = () => (
 ## <a name="canvas"></a>Canvas
 
 <br />
-![Canvas](https://i.imgur.com/p7sBUHZ.png)
+<img src="https://i.imgur.com/p7sBUHZ.png" alt="Canvas icon" />
 
 ### Overview
 
@@ -281,7 +281,7 @@ const CanvasExample = () => (
 ## <a name="uniform-grid"></a>UniformGrid
 
 <br />
-![UniformGrid](https://i.imgur.com/R1X4BEf.png)
+<img src="https://i.imgur.com/R1X4BEf.png" alt="UniformGrid icon" />
 
 ### Overview
 
