@@ -222,9 +222,6 @@ Child elements can be given props, to define where and how they sit in the grid.
 * `gridRowSpan: number` (optional) How many rows the element takes up (defaults to 1).
 * `gridColumnSpan: number` (optional) How many columns the element takes up (defaults to 1).
 
-#### `children: []`
-
-The children to be rendered inside the grid.
 
 
 ### Example
@@ -294,10 +291,6 @@ Child elements can be given props, to define where and how they sit on the canva
 * `canvasLeft: number | string` (optional) Left position of the element. 0 means the very left, greater means farther from the left and closer to the right.
 
 * `canvasZIndex: number` (optional) Position of the element on the Z-Index (that is, order of overlapping, where part or all of the element overlaps with other elements). Greater means closer to the front, relative to the Z-Index of other elements. Lesser means farther to the back.
-
-#### `children: []`
-
-The children to be rendered on the canvas.
 
 
 ### Example
