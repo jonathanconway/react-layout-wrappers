@@ -1,16 +1,15 @@
 import React from 'react';
 import { Wrap } from 'react-layout';
 
-const style = {
-  'border': 'solid 1px black',
-  'width': '30px'
-};
-
 const WrapDefault = () => (
   <Wrap>
-    {Array(100).fill(0).map((_, index) =>
-      <span key={`wrap-${index}`} style={style}>{index}</span>
-    )}
+    <span>Tag 1</span>
+    <span>Tag 2</span>
+    <span>Tag 3</span>
+    <span>Tag 4</span>
+    <span>Tag 5</span>
+    <span>Tag 6</span>
+    <span>Tag 7</span>
   </Wrap>
 );
 

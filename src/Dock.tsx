@@ -37,6 +37,7 @@ const DockChildContainerDiv = styled.div`
   flex-direction: ${calculateDockChildFlexDirection};
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
 
   &.should-fill {
     > * {

@@ -23,8 +23,8 @@ const GridDefault = () => (
     </Grid>
 
     <Grid
-      rowDefinitions={[{ height: 20 }, { height: 30 }, { height: 40 }, { height: 50 }]}
-      columnDefinitions={[{ width: 20 }, { width: 30 }, { width: 40 }, { width: 50 }]}
+      rowDefinitions={[{ height: 40 }, { height: 60 }, { height: 80 }, { height: 100 }]}
+      columnDefinitions={[{ width: 60 }, { width: 80 }, { width: 100 }, { width: 120 }]}
     >
       <button gridRow={0} gridColumn={0}>Btn 1</button>
       <button gridRow={1} gridColumn={1}>Btn 2</button>

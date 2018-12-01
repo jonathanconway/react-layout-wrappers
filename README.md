@@ -83,6 +83,8 @@ const StackExample = () => (
 );
 ```
 
+<img src="https://i.imgur.com/TBE3qOx.png" alt="Stack example screenshot" />
+
 
 ## <a name="wrap"></a>Wrap
 
@@ -129,6 +131,8 @@ const WrapExample = () => (
 );
 ```
 
+<img src="https://i.imgur.com/ZBmoK7N.png" alt="Wrap example screenshot" />
+
 
 ## <a name="dock"></a>Dock
 
@@ -160,20 +164,20 @@ The children to be rendered inside the dock component.
 
 ```jsx
 import React from 'react';
-import { Wrap } from 'react-layout-wrappers';
+import { Dock } from 'react-layout-wrappers';
 
-const HorizontalWrap = () => (
-  <Wrap>
-    <span>Tag 1</span>
-    <span>Tag 2</span>
-    <span>Tag 3</span>
-    <span>Tag 4</span>
-    <span>Tag 5</span>
-    <span>Tag 6</span>
-    <span>Tag 7</span>
-  </Wrap>
+const DockExample = () => (
+  <Dock>
+    <button dock="top">One</button>
+    <button dock="left">Two</button>
+    <button dock="right">Three</button>
+    <button dock="right">Four</button>
+    <button dock="bottom">Five</button>
+  </Dock>
 );
 ```
+
+<img src="https://i.imgur.com/Y9v73jk.png" alt="Dock example screenshot" />
 
 
 ## <a name="grid"></a>Grid
@@ -229,20 +233,41 @@ The children to be rendered inside the grid.
 import React from 'react';
 import { Grid } from 'react-layout-wrappers';
 
-const GridExample = () => (
-  <Grid>
-    <span style={{ 'background-color': 'black' }} gridRow={1} gridColumn={1}>Btn 1</span>
-    <span style={{ 'background-color': 'white' }} gridRow={1} gridColumn={2}>Btn 2</span>
-    <span style={{ 'background-color': 'black' }} gridRow={1} gridColumn={3}>Btn 3</span>
-    <span style={{ 'background-color': 'white' }} gridRow={2} gridColumn={1}>Btn 4</span>
-    <span style={{ 'background-color': 'black' }} gridRow={2} gridColumn={2}>Btn 5</span>
-    <span style={{ 'background-color': 'white' }} gridRow={2} gridColumn={3}>Btn 6</span>
-    <span style={{ 'background-color': 'black' }} gridRow={3} gridColumn={1}>Btn 7</span>
-    <span style={{ 'background-color': 'white' }} gridRow={3} gridColumn={2}>Btn 8</span>
-    <span style={{ 'background-color': 'black' }} gridRow={3} gridColumn={3}>Btn 9</span>
-  </Grid>
+const GridExamples = () => (
+  <div>
+    <Grid
+      rowDefinitions={[{}, {}, {}, {}]}
+      columnDefinitions={[{}, {}, {}, {}]}
+    >
+      <button gridRow={0} gridColumn={0}>Btn 1</button>
+      <button gridRow={1} gridColumn={1}>Btn 2</button>
+      <button gridRow={2} gridColumn={2}>Btn 3</button>
+      <button gridRow={3} gridColumn={3}>Btn 4</button>
+    </Grid>
+
+    <Grid
+      rowDefinitions={[{}, {}, {}, {}]}
+      columnDefinitions={[{}, {}, {}, {}]}
+    >
+      <button gridRow={0} gridColumn={0} gridColumnSpan={2}>Btn 1</button>
+      <button gridRow={1} gridColumn={1} gridRowSpan={2}>Btn 2</button>
+      <button gridRow={2} gridColumn={2} gridRowSpan={2} gridColumnSpan={2}>Btn 3</button>
+    </Grid>
+
+    <Grid
+      rowDefinitions={[{ height: 40 }, { height: 60 }, { height: 80 }, { height: 100 }]}
+      columnDefinitions={[{ width: 60 }, { width: 80 }, { width: 100 }, { width: 120 }]}
+    >
+      <button gridRow={0} gridColumn={0}>Btn 1</button>
+      <button gridRow={1} gridColumn={1}>Btn 2</button>
+      <button gridRow={2} gridColumn={2}>Btn 3</button>
+      <button gridRow={3} gridColumn={3}>Btn 4</button>
+    </Grid>
+  </div>
 );
 ```
+
+<img src="https://i.imgur.com/JIhHJth.png" alt="Grid example screenshot" height="300px" />
 
 
 ## <a name="canvas"></a>Canvas
@@ -293,6 +318,8 @@ const CanvasExample = () => (
 );
 ```
 
+<img src="https://i.imgur.com/R0PbFqT.png" alt="Canvas example screenshot" />
+
 
 ## <a name="uniform-grid"></a>UniformGrid
 
@@ -314,6 +341,29 @@ UniformGrid is a container that slots its children into cells, defined by rows a
 #### `children: []`
 
 The children to be rendered inside the grid.
+
+
+### Example
+
+```jsx
+import React from 'react';
+import { UniformGrid } from 'react-layout-wrappers';
+
+const UniformGridExample = () => (
+  <UniformGrid rows={2} columns={4}>
+    <span>Item1</span>
+    <span>Item2</span>
+    <span>Item3</span>
+    <span>Item4</span>
+    <span>Item5</span>
+    <span>Item6</span>
+    <span>Item7</span>
+    <span>Item8</span>
+  </UniformGrid>
+);
+```
+
+<img src="https://i.imgur.com/pOb36Eu.png" alt="UniformGrid example screenshot" />
 
 
 # Resources

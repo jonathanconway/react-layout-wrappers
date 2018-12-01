@@ -47,3 +47,26 @@ main {
   max-width: 600px;
   padding: 1rem;
 }
+
+button,
+span {
+  border-radius: 3px;
+  margin: 3px;
+  padding: 3px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  min-height: 30px;
+  min-width: 30px;
+  background-color: white;
+}
+
+button {
+  border: solid 2px #A66BCC;
+  border-bottom-width: 5px;
+  border-right-width: 5px;
+}
+
+span {
+  border: solid 2px #D9BD73;
+}
+
