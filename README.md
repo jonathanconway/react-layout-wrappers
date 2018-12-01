@@ -55,8 +55,8 @@ Stack is a container that stacks its children next to each other, one after anot
 
 #### `orientation: 'horizontal' | 'vertical'`
 
-* `horizontal` (default) Lays out the children horizontally / length-wise.
-* `vertical` Lays out the children vertically / height-wise.
+* `vertical` (default) Lays out the children vertically
+* `horizontal` Lays out the children horizontally
 
 #### `direction: 'left-to-right' | 'right-to-left'`
 
