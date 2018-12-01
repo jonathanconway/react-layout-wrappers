@@ -267,7 +267,7 @@ const GridExamples = () => (
 );
 ```
 
-<img src="https://i.imgur.com/JIhHJth.png" alt="Grid example screenshot" height="300px" />
+<img src="https://i.imgur.com/JIhHJth.png" alt="Grid example screenshot" />
 
 
 ## <a name="canvas"></a>Canvas
