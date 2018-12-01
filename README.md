@@ -72,7 +72,7 @@ The children to be rendered inside the stack component.
 
 ```jsx
 import React from 'react';
-import { Stack } from 'react-layout';
+import { Stack } from 'react-layout-wrappers';
 
 const StackExample = () => (
   <Stack>
@@ -114,7 +114,7 @@ The children to be rendered inside the wrap component.
 
 ```jsx
 import React from 'react';
-import { Wrap } from 'react-layout';
+import { Wrap } from 'react-layout-wrappers';
 
 const WrapExample = () => (
   <Wrap>
@@ -160,7 +160,7 @@ The children to be rendered inside the dock component.
 
 ```jsx
 import React from 'react';
-import { Wrap } from 'react-layout';
+import { Wrap } from 'react-layout-wrappers';
 
 const HorizontalWrap = () => (
   <Wrap>
@@ -227,7 +227,7 @@ The children to be rendered inside the grid.
 
 ```jsx
 import React from 'react';
-import { Grid } from 'react-layout';
+import { Grid } from 'react-layout-wrappers';
 
 const GridExample = () => (
   <Grid>
@@ -279,7 +279,7 @@ The children to be rendered on the canvas.
 
 ```jsx
 import React from 'react';
-import { Canvas } from 'react-layout';
+import { Canvas } from 'react-layout-wrappers';
 
 const CanvasExample = () => (
   <Canvas style={style}>
