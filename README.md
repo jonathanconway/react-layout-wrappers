@@ -25,6 +25,20 @@ This is (hopefully) simpler and less tedious and repetitive than writing custom 
 
 In React Layout, all the layout components are simply React components, so you can easily fit them in alongside whatever other React components you're using (or just standard DOM elements in React). You can look at your hierarchy of components and easily determine how they will be laid out.
 
+# Installation
+
+NPM:
+
+```
+npm install --save reactlayout
+```
+
+Yarn:
+
+```
+yarn add reactlayout
+```
+
 # Components
 
 ## <a name="stack"></a>Stack
