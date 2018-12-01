@@ -1,4 +1,4 @@
-# React Layout
+# React Layout Wrappers
 
 <img src="https://i.imgur.com/rg2jv9n.png" alt="React Layout logo" style="width:80px;"/>
 
