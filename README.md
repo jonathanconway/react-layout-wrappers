@@ -32,13 +32,13 @@ In React Layout, all the layout components are simply React components, so you c
 NPM:
 
 ```
-npm install --save reactlayout
+npm install --save react-layout-wrappers
 ```
 
 Yarn:
 
 ```
-yarn add reactlayout
+yarn add react-layout-wrappers
 ```
 
 # Components
