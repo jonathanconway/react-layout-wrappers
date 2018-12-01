@@ -4,7 +4,9 @@
 
 [![license](https://badgen.now.sh/badge/license/MIT)](./LICENSE)
 
-A small collection of wrappers for implementing layout in your React application. Inspired by Microsoft's WPF layout components.
+A small collection of wrappers for implementing layout in your React application.
+
+Inspired by Microsoft's WPF layout components.
 
 The wrappers:
 
