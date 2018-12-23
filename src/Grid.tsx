@@ -29,11 +29,11 @@ export interface GridChildProps extends HTMLProps<HTMLElement> {
   readonly gridColumnSpan?: number;
 }
 
-type GridChildElement = ReactElement<GridChildProps>;
+type GridChild = ReactElement<GridChildProps>;
 
 interface GridDivProps {
   readonly gridProps: GridProps;
-  readonly elements: ReadonlyArray<GridChildElement>;
+  readonly elements: ReadonlyArray<GridChild>;
 }
 
 const valueOr1Fr = valueOrDefault('1fr');
@@ -99,7 +99,7 @@ const addKeysAndIdsToElements = addKeysAndIdsWithPrefixToElements(childPrefix);
  */
 const getGridChildElements = (children: ReadonlyArray<ReactChild>) =>
   children
-    .map(gridChild => gridChild as GridChildElement)
+    .map(gridChild => gridChild as GridChild)
     .filter(x => !!x)
     .map(gridChild => gridChild);
 

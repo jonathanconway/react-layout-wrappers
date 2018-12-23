@@ -10,11 +10,11 @@ export interface DockProps extends WrapperProps {
 
 export type DockDirection = 'top' | 'right' | 'bottom' | 'left';
 
-interface DockChildContainerProps extends HTMLAttributes<HTMLDivElement> {
+interface DockChildProps extends HTMLAttributes<HTMLDivElement> {
   readonly dock?: DockDirection;
 }
 
-type DockChildContainer = ReactElement<DockChildContainerProps>;
+type DockChild = ReactElement<DockChildProps>;
 
 interface DockChildWrappingInfo {
   readonly dockProps: DockProps;
@@ -28,11 +28,10 @@ const dockChildDirectionsToFlexDirections = {
   left: 'row',
 };
 
-const calculateDockChildFlexDirection = ({
-  dock = 'left',
-}: DockChildContainerProps) => dockChildDirectionsToFlexDirections[dock];
+const calculateDockChildFlexDirection = ({ dock = 'left' }: DockChildProps) =>
+  dockChildDirectionsToFlexDirections[dock];
 
-const DockChildContainerDiv = styled.div`
+const DockChildDiv = styled.div`
   display: flex;
   flex-direction: ${calculateDockChildFlexDirection};
   width: 100%;
@@ -53,8 +52,8 @@ const DockChildContainerDiv = styled.div`
 const calculateDockChildContainerProps = ({
   dockProps,
   children,
-}: DockChildWrappingInfo): DockChildContainerProps => {
-  const child = children[0] as DockChildContainer;
+}: DockChildWrappingInfo): DockChildProps => {
+  const child = children[0] as DockChild;
   const dock = ((child || {}).props || {}).dock;
   const isLastChild = children.length === 1;
   const shouldFill = !!dockProps.lastChildFill && isLastChild;
@@ -86,7 +85,7 @@ const wrapChildrenInNestedContainers = ({
     children,
   });
   return (
-    <DockChildContainerDiv {...dockChildContainerProps}>
+    <DockChildDiv {...dockChildContainerProps}>
       {children[0]}
       {children.length > 1
         ? wrapChildrenInNestedContainers({
@@ -94,7 +93,7 @@ const wrapChildrenInNestedContainers = ({
             children: children.slice(1),
           })
         : undefined}
-    </DockChildContainerDiv>
+    </DockChildDiv>
   );
 };
 

@@ -19,10 +19,10 @@ export interface CanvasChildProps extends HTMLProps<HTMLElement> {
   readonly canvasZIndex?: number;
 }
 
-type CanvasChildElement = ReactElement<CanvasChildProps>;
+type CanvasChild = ReactElement<CanvasChildProps>;
 
 interface CanvasDivProps {
-  readonly elements: ReadonlyArray<CanvasChildElement>;
+  readonly elements: ReadonlyArray<CanvasChild>;
 }
 
 const childPrefix = 'canvas-child';
@@ -74,7 +74,7 @@ const addKeysAndIdsToElements = addKeysAndIdsWithPrefixToElements(childPrefix);
  */
 export const Canvas = ({ children, ...props }: CanvasProps) => {
   const elements = addKeysAndIdsToElements((children || []) as ReadonlyArray<
-    CanvasChildElement
+    CanvasChild
   >);
   return (
     <CanvasDiv {...props} elements={elements}>
