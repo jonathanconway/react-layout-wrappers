@@ -25,16 +25,16 @@ describe('A <Grid />', () => {
 
     describe('with children assigned to some of the cells', () => {
       const children = [
-        <Button key={0} gridRow={0} gridColumn={0}>
+        <Button key={1} gridRow={1} gridColumn={1}>
           Btn 1
         </Button>,
-        <Button key={1} gridRow={1} gridColumn={1}>
+        <Button key={2} gridRow={2} gridColumn={2}>
           Btn 2
         </Button>,
-        <Button key={2} gridRow={2} gridColumn={2}>
+        <Button key={3} gridRow={3} gridColumn={3}>
           Btn 3
         </Button>,
-        <Button key={3} gridRow={3} gridColumn={3}>
+        <Button key={4} gridRow={4} gridColumn={4}>
           Btn 4
         </Button>,
       ];
@@ -73,18 +73,18 @@ describe('A <Grid />', () => {
 
     describe('with a child that spans more than one column and/or row', () => {
       const children = [
-        <Button key={0} gridRow={0} gridColumn={0} gridColumnSpan={2}>
+        <Button key={1} gridRow={1} gridColumn={1} gridColumnSpan={3}>
           Btn 1
         </Button>,
-        <Button key={1} gridRow={1} gridColumn={2} gridRowSpan={2}>
+        <Button key={2} gridRow={2} gridColumn={3} gridRowSpan={3}>
           Btn 2
         </Button>,
         <Button
-          key={2}
-          gridRow={2}
-          gridColumn={0}
-          gridColumnSpan={2}
-          gridRowSpan={2}
+          key={3}
+          gridRow={3}
+          gridColumn={1}
+          gridColumnSpan={3}
+          gridRowSpan={3}
         >
           Btn 3
         </Button>,
@@ -101,14 +101,14 @@ describe('A <Grid />', () => {
         expect(tree).toHaveStyleRule('grid-column-start', '1', {
           modifier: '#grid-child-0',
         });
-        expect(tree).toHaveStyleRule('grid-column-end', '3', {
+        expect(tree).toHaveStyleRule('grid-column-end', '4', {
           modifier: '#grid-child-0',
         });
 
         expect(tree).toHaveStyleRule('grid-row-start', '2', {
           modifier: '#grid-child-1',
         });
-        expect(tree).toHaveStyleRule('grid-row-end', '4', {
+        expect(tree).toHaveStyleRule('grid-row-end', '5', {
           modifier: '#grid-child-1',
         });
         expect(tree).toHaveStyleRule('grid-column-start', '3', {
@@ -121,13 +121,13 @@ describe('A <Grid />', () => {
         expect(tree).toHaveStyleRule('grid-row-start', '3', {
           modifier: '#grid-child-2',
         });
-        expect(tree).toHaveStyleRule('grid-row-end', '5', {
+        expect(tree).toHaveStyleRule('grid-row-end', '6', {
           modifier: '#grid-child-2',
         });
         expect(tree).toHaveStyleRule('grid-column-start', '1', {
           modifier: '#grid-child-2',
         });
-        expect(tree).toHaveStyleRule('grid-column-end', '3', {
+        expect(tree).toHaveStyleRule('grid-column-end', '4', {
           modifier: '#grid-child-2',
         });
       });
@@ -151,16 +151,16 @@ describe('A <Grid />', () => {
     };
     const tree = mount(
       <Grid {...props}>
-        <Button key={0} gridRow={0} gridColumn={0}>
+        <Button key={1} gridRow={1} gridColumn={1}>
           Btn 1
         </Button>
-        <Button key={1} gridRow={1} gridColumn={1}>
+        <Button key={2} gridRow={2} gridColumn={2}>
           Btn 2
         </Button>
-        <Button key={2} gridRow={2} gridColumn={2}>
+        <Button key={3} gridRow={3} gridColumn={3}>
           Btn 3
         </Button>
-        <Button key={3} gridRow={3} gridColumn={3}>
+        <Button key={4} gridRow={4} gridColumn={4}>
           Btn 4
         </Button>
       </Grid>
