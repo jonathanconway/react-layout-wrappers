@@ -149,19 +149,17 @@ Dock is a container in which each child gravitates to one of its four edges.
 
 ### Props
 
-#### `orientation: 'horizontal' | 'vertical'`
+#### `lastChildFill: boolean`
 
-* `horizontal` (default) Lays out the children horizontally / length-wise.
-* `vertical` Lays out the children vertically / height-wise.
-
-#### `direction: 'left-to-right' | 'right-to-left'`
-
-* `left-to-right` Lays out the components in order, from left to right (if horizontal) or from top to bottom (if vertical)
-* `right-to-left` Reverse of the above; right to left (if horizontal) or bottom to top (if vertical)
+If true, makes the last DockChild in `children` fill all of the remaining space.
 
 #### `children: DockChild[]`
 
 An array of DockChild elements to be rendered inside the Dock.
+
+Each DockChild can be given props, to define where it sits in the Dock.
+
+* `dock: 'top' | 'right' | 'bottom' | 'left'` Which edge of the Dock to pull the element toward.
 
 
 ### Example
@@ -216,16 +214,6 @@ Defines how many rows are in the grid (the number of elements in the array) and 
 Defines how many columns are in the grid (the number of elements in the array) and settings for each individual column:
 
 * `width: number` (optional) Defines the width of each column.
-
-#### `orientation: 'horizontal' | 'vertical'`
-
-* `horizontal` (default) Lays out the children horizontally / length-wise.
-* `vertical` Lays out the children vertically / height-wise.
-
-#### `direction: 'left-to-right' | 'right-to-left'`
-
-* `left-to-right` Lays out the components in order, from left to right (if horizontal) or from top to bottom (if vertical)
-* `right-to-left` Reverse of the above; right to left (if horizontal) or bottom to top (if vertical)
 
 #### `children: GridChild[]`
 
@@ -372,11 +360,11 @@ UniformGrid is a container that slots its children into cells, defined by rows a
 
 #### `rows: number`
 
-(optional) Defines how many rows are in the grid.
+Number of rows in the grid.
 
-#### `columnDefinitions: number`
+#### `columns: number`
 
-(optional) Defines how many columns are in the grid.
+Number of columns in the grid.
 
 #### `children: UniformGridChild[]`
 
