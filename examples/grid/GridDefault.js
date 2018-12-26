@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from 'react-layout';
+import { Grid, GridChild } from 'react-layout';
 
 const GridDefault = () => (
   <div>
@@ -7,29 +7,51 @@ const GridDefault = () => (
       rowDefinitions={[{}, {}, {}, {}]}
       columnDefinitions={[{}, {}, {}, {}]}
     >
-      <button gridRow={1} gridColumn={1}>Btn 1</button>
-      <button gridRow={2} gridColumn={2}>Btn 2</button>
-      <button gridRow={3} gridColumn={3}>Btn 3</button>
-      <button gridRow={4} gridColumn={4}>Btn 4</button>
+      <GridChild gridRow={1} gridColumn={1}>
+        <button>Btn 1</button>
+      </GridChild>
+      <GridChild gridRow={2} gridColumn={2}>
+        <button>Btn 2</button>
+      </GridChild>
+      <GridChild gridRow={3} gridColumn={3}>
+        <button>Btn 3</button>
+      </GridChild>
+      <GridChild gridRow={4} gridColumn={4}>
+        <button>Btn 4</button>
+      </GridChild>
     </Grid>
 
     <Grid
       rowDefinitions={[{}, {}, {}, {}]}
       columnDefinitions={[{}, {}, {}, {}]}
     >
-      <button gridRow={1} gridColumn={1} gridColumnSpan={2}>Btn 1</button>
-      <button gridRow={2} gridColumn={2} gridRowSpan={2}>Btn 2</button>
-      <button gridRow={3} gridColumn={3} gridRowSpan={2} gridColumnSpan={2}>Btn 3</button>
+      <GridChild gridRow={1} gridColumn={1} gridColumnSpan={2}>
+        <button>Btn 1</button>
+      </GridChild>
+      <GridChild gridRow={2} gridColumn={2} gridRowSpan={2}>
+        <button>Btn 2</button>
+      </GridChild>
+      <GridChild gridRow={3} gridColumn={3} gridRowSpan={2} gridColumnSpan={2}>
+        <button>Btn 3</button>
+      </GridChild>
     </Grid>
 
     <Grid
       rowDefinitions={[{ height: 40 }, { height: 60 }, { height: 80 }, { height: 100 }]}
       columnDefinitions={[{ width: 60 }, { width: 80 }, { width: 100 }, { width: 120 }]}
     >
-      <button gridRow={1} gridColumn={1}>Btn 1</button>
-      <button gridRow={2} gridColumn={2}>Btn 2</button>
-      <button gridRow={3} gridColumn={3}>Btn 3</button>
-      <button gridRow={4} gridColumn={4}>Btn 4</button>
+      <GridChild gridRow={1} gridColumn={1}>
+        <button>Btn 1</button>
+      </GridChild>
+      <GridChild gridRow={2} gridColumn={2}>
+        <button>Btn 2</button>
+      </GridChild>
+      <GridChild gridRow={3} gridColumn={3}>
+        <button>Btn 3</button>
+      </GridChild>
+      <GridChild gridRow={4} gridColumn={4}>
+        <button>Btn 4</button>
+      </GridChild>
     </Grid>
   </div>
 );

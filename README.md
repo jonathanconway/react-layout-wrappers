@@ -63,9 +63,9 @@ Stack is a container that stacks its children next to each other, one after anot
 * `left-to-right` Lays out the components in order, from left to right (if horizontal) or from top to bottom (if vertical)
 * `right-to-left` Reverse of the above; right to left (if horizontal) or bottom to top (if vertical)
 
-#### `children: []`
+#### `children: StackChild[]`
 
-The children to be rendered inside the stack component.
+An array of StackChild elements to be rendered inside the Stack.
 
 
 ### Example
@@ -76,9 +76,15 @@ import { Stack } from 'react-layout-wrappers';
 
 const StackExample = () => (
   <Stack>
-    <h1>Heading</h1>
-    <p>Paragraph</p>
-    <button>Button</button>
+    <StackChild>
+      <h1>Heading</h1>
+    </StackChild>
+    <StackChild>
+      <p>Paragraph</p>
+    </StackChild>
+    <StackChild>
+      <button>Button</button>
+    </StackChild>
   </Stack>
 );
 ```
@@ -107,9 +113,9 @@ Wrap is a container in which children appear next to each other, one after anoth
 * `left-to-right` Lays out the components in order, from left to right (if horizontal) or from top to bottom (if vertical)
 * `right-to-left` Reverse of the above; right to left (if horizontal) or bottom to top (if vertical)
  
-#### `children: []`
+#### `children: WrapChild[]`
 
-The children to be rendered inside the wrap component.
+An array of WrapChild elements to be rendered inside the Wrap.
 
 
 ### Example
@@ -119,14 +125,12 @@ import React from 'react';
 import { Wrap } from 'react-layout-wrappers';
 
 const WrapExample = () => (
-  <Wrap>
-    <span>Tag 1</span>
-    <span>Tag 2</span>
-    <span>Tag 3</span>
-    <span>Tag 4</span>
-    <span>Tag 5</span>
-    <span>Tag 6</span>
-    <span>Tag 7</span>
+  <Wrap style={{ width: '200px' }}>
+    {Array(7).fill(null).map((_, i) =>
+      <WrapChild>
+        <span>Tag {i + 1}</span>
+      </WrapChild>
+    )}
   </Wrap>
 );
 ```
@@ -155,9 +159,9 @@ Dock is a container in which each child gravitates to one of its four edges.
 * `left-to-right` Lays out the components in order, from left to right (if horizontal) or from top to bottom (if vertical)
 * `right-to-left` Reverse of the above; right to left (if horizontal) or bottom to top (if vertical)
 
-#### `children: []`
+#### `children: DockChild[]`
 
-The children to be rendered inside the dock component.
+An array of DockChild elements to be rendered inside the Dock.
 
 
 ### Example
@@ -167,12 +171,22 @@ import React from 'react';
 import { Dock } from 'react-layout-wrappers';
 
 const DockExample = () => (
-  <Dock>
-    <button dock="top">One</button>
-    <button dock="left">Two</button>
-    <button dock="right">Three</button>
-    <button dock="right">Four</button>
-    <button dock="bottom">Five</button>
+  <Dock style={{ height: '100px' }} lastChildFill={true}>
+    <DockChild dock="top">
+      <button>One</button>
+    </DockChild>
+    <DockChild dock="left">
+      <button>Two</button>
+    </DockChild>
+    <DockChild dock="right">
+      <button>Three</button>
+    </DockChild>
+    <DockChild dock="right">
+      <button>Four</button>
+    </DockChild>
+    <DockChild dock="bottom">
+      <button>Five</button>
+    </DockChild>
   </Dock>
 );
 ```
@@ -213,15 +227,16 @@ Defines how many columns are in the grid (the number of elements in the array) a
 * `left-to-right` Lays out the components in order, from left to right (if horizontal) or from top to bottom (if vertical)
 * `right-to-left` Reverse of the above; right to left (if horizontal) or bottom to top (if vertical)
 
-#### `children: [{ gridRow, gridColumn, gridRowSpan, gridColumnSpan }]`
+#### `children: GridChild[]`
 
-Child elements can be given props, to define where and how they sit in the grid.
+An array of GridChild elements to be rendered inside the Grid.
+
+Each GridChild can be given props, to define where and how it sits in the Grid.
 
 * `gridRow: number` (optional) Which row to position the element in  (1-based).
 * `gridColumn: number` (optional) Which column to position the element in  (1-based).
 * `gridRowSpan: number` (optional) How many rows the element takes up (defaults to 1).
 * `gridColumnSpan: number` (optional) How many columns the element takes up (defaults to 1).
-
 
 
 ### Example
@@ -236,29 +251,51 @@ const GridExamples = () => (
       rowDefinitions={[{}, {}, {}, {}]}
       columnDefinitions={[{}, {}, {}, {}]}
     >
-      <button gridRow={1} gridColumn={1}>Btn 1</button>
-      <button gridRow={2} gridColumn={2}>Btn 2</button>
-      <button gridRow={3} gridColumn={3}>Btn 3</button>
-      <button gridRow={4} gridColumn={4}>Btn 4</button>
+      <GridChild gridRow={1} gridColumn={1}>
+        <button>Btn 1</button>
+      </GridChild>
+      <GridChild gridRow={2} gridColumn={2}>
+        <button>Btn 2</button>
+      </GridChild>
+      <GridChild gridRow={3} gridColumn={3}>
+        <button>Btn 3</button>
+      </GridChild>
+      <GridChild gridRow={4} gridColumn={4}>
+        <button>Btn 4</button>
+      </GridChild>
     </Grid>
 
     <Grid
       rowDefinitions={[{}, {}, {}, {}]}
       columnDefinitions={[{}, {}, {}, {}]}
     >
-      <button gridRow={1} gridColumn={1} gridColumnSpan={2}>Btn 1</button>
-      <button gridRow={2} gridColumn={2} gridRowSpan={2}>Btn 2</button>
-      <button gridRow={3} gridColumn={3} gridRowSpan={2} gridColumnSpan={2}>Btn 3</button>
+      <GridChild gridRow={1} gridColumn={1} gridColumnSpan={2}>
+        <button>Btn 1</button>
+      </GridChild>
+      <GridChild gridRow={2} gridColumn={2} gridRowSpan={2}>
+        <button>Btn 2</button>
+      </GridChild>
+      <GridChild gridRow={3} gridColumn={3} gridRowSpan={2} gridColumnSpan={2}>
+        <button>Btn 3</button>
+      </GridChild>
     </Grid>
 
     <Grid
       rowDefinitions={[{ height: 40 }, { height: 60 }, { height: 80 }, { height: 100 }]}
       columnDefinitions={[{ width: 60 }, { width: 80 }, { width: 100 }, { width: 120 }]}
     >
-      <button gridRow={1} gridColumn={1}>Btn 1</button>
-      <button gridRow={2} gridColumn={2}>Btn 2</button>
-      <button gridRow={3} gridColumn={3}>Btn 3</button>
-      <button gridRow={4} gridColumn={4}>Btn 4</button>
+      <GridChild gridRow={1} gridColumn={1}>
+        <button>Btn 1</button>
+      </GridChild>
+      <GridChild gridRow={2} gridColumn={2}>
+        <button>Btn 2</button>
+      </GridChild>
+      <GridChild gridRow={3} gridColumn={3}>
+        <button>Btn 3</button>
+      </GridChild>
+      <GridChild gridRow={4} gridColumn={4}>
+        <button>Btn 4</button>
+      </GridChild>
     </Grid>
   </div>
 );
@@ -278,18 +315,16 @@ Canvas is a container that lets you place its children at co-ordinates on a 2D p
 
 ### Props
 
-#### `children: [{ canvasTop, canvasRight, canvasBottom, canvasLeft, canvasZIndex }]`
+#### `children: CanvasChild[]`
 
-Child elements can be given props, to define where and how they sit on the canvas.
+An array of CanvasChild elements to be rendered inside the Canvas.
+
+Each CanvasChild can be given props, to define where and how it sits on the Canvas.
 
 * `canvasTop: number | string` (optional) Top position of the element. 0 means the very top, greater means farther from the top and closer to the bottom.
-
 * `canvasRight: number | string` (optional) Right position of the element. 0 means the very right, greater means farther from the right and closer to the left.
-
 * `canvasBottom: number | string` (optional) Bottom position of the element. 0 means the very bottom, greater means farther from the bottom and closer to the top.
-
 * `canvasLeft: number | string` (optional) Left position of the element. 0 means the very left, greater means farther from the left and closer to the right.
-
 * `canvasZIndex: number` (optional) Position of the element on the Z-Index (that is, order of overlapping, where part or all of the element overlaps with other elements). Greater means closer to the front, relative to the Z-Index of other elements. Lesser means farther to the back.
 
 
@@ -300,13 +335,25 @@ import React from 'react';
 import { Canvas } from 'react-layout-wrappers';
 
 const CanvasExample = () => (
-  <Canvas style={style}>
-    <button canvasTop={20} canvasLeft={20}>Btn 1</button>
-    <button canvasTop={20} canvasRight={20}>Btn 2</button>
-    <button canvasBottom={20} canvasRight={20}>Btn 3</button>
-    <button canvasBottom={20} canvasLeft={20}>Btn 4</button>
-    <button canvasTop={80} canvasLeft={80} canvasZIndex={1}>Btn 5</button>
-    <button canvasTop={90} canvasLeft={90}>Btn 6</button>
+  <Canvas style={{ height: '200px' }}>
+    <CanvasChild canvasTop={20} canvasLeft={20}>
+      <button>Btn 1</button>
+    </CanvasChild>
+    <CanvasChild canvasTop={20} canvasRight={20}>
+      <button>Btn 2</button>
+    </CanvasChild>
+    <CanvasChild canvasBottom={20} canvasRight={20}>
+      <button>Btn 3</button>
+    </CanvasChild>
+    <CanvasChild canvasBottom={20} canvasLeft={20}>
+      <button>Btn 4</button>
+    </CanvasChild>
+    <CanvasChild canvasTop={80} canvasLeft={80} canvasZIndex={1}>
+      <button>Btn 5</button>
+    </CanvasChild>
+    <CanvasChild canvasTop={90} canvasLeft={90}>
+      <button>Btn 6</button>
+    </CanvasChild>
   </Canvas>
 );
 ```
@@ -331,9 +378,9 @@ UniformGrid is a container that slots its children into cells, defined by rows a
 
 (optional) Defines how many columns are in the grid.
 
-#### `children: []`
+#### `children: UniformGridChild[]`
 
-The children to be rendered inside the grid.
+An array of UniformGridChild elements to be rendered inside the UniformGrid.
 
 
 ### Example
@@ -344,14 +391,11 @@ import { UniformGrid } from 'react-layout-wrappers';
 
 const UniformGridExample = () => (
   <UniformGrid rows={2} columns={4}>
-    <span>Item1</span>
-    <span>Item2</span>
-    <span>Item3</span>
-    <span>Item4</span>
-    <span>Item5</span>
-    <span>Item6</span>
-    <span>Item7</span>
-    <span>Item8</span>
+    {Array(8).fill(null).map((_, i) =>
+      <UniformGridChild>
+        <span>Item {i + 1}</span>
+      </UniformGridChild>
+    )}
   </UniformGrid>
 );
 ```

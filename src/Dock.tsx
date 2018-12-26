@@ -1,113 +1,80 @@
 import * as React from 'react';
-import { ReactChild, ReactElement, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-import { WrapperProps } from './types';
+import { WrapperProps, WrapperChildProps } from './types';
+import { ReactElement } from 'react';
 
-export interface DockProps extends WrapperProps {
+export interface DockProps extends WrapperProps<DockChildProps> {
   readonly lastChildFill?: boolean;
 }
 
 export type DockDirection = 'top' | 'right' | 'bottom' | 'left';
 
-interface DockChildProps extends HTMLAttributes<HTMLDivElement> {
+export interface DockChildProps extends WrapperChildProps {
   readonly dock?: DockDirection;
 }
 
-type DockChild = ReactElement<DockChildProps>;
+const defaultDockChildProps: DockChildProps = { dock: 'left' };
 
-interface DockChildWrappingInfo {
+interface StyledDockChildDivProps {
   readonly dockProps: DockProps;
-  readonly children: ReactChild[];
+  readonly dockChildren: ReadonlyArray<ReactElement<DockChildProps>>;
 }
 
-const dockChildDirectionsToFlexDirections = {
-  top: 'column',
-  right: 'row-reverse',
-  bottom: 'column-reverse',
-  left: 'row',
-};
-
-const calculateDockChildFlexDirection = ({ dock = 'left' }: DockChildProps) =>
-  dockChildDirectionsToFlexDirections[dock];
-
-const DockChildDiv = styled.div`
+const StyledDockChildDiv =
+  styled.div <
+  StyledDockChildDivProps >
+  `
   display: flex;
-  flex-direction: ${calculateDockChildFlexDirection};
+  flex-direction: ${props =>
+    ({
+      top: 'column',
+      right: 'row-reverse',
+      bottom: 'column-reverse',
+      left: 'row',
+    }[props.dockChildren[0].props.dock || defaultDockChildProps.dock!])};
   width: 100%;
   height: 100%;
   box-sizing: border-box;
 
-  &.should-fill {
-    > * {
-      flex: 1;
-    }
-  }
+  ${props =>
+    !!props.dockProps.lastChildFill && props.dockChildren.length === 1
+      ? `
+        > * {
+            flex: 1;
+        }
+      `
+      : undefined}
 `;
 
 /**
- * Determine what props to pass the Dock child container, in order to style it
- * correctly.
- */
-const calculateDockChildContainerProps = ({
-  dockProps,
-  children,
-}: DockChildWrappingInfo): DockChildProps => {
-  const child = children[0] as DockChild;
-  const dock = ((child || {}).props || {}).dock;
-  const isLastChild = children.length === 1;
-  const shouldFill = !!dockProps.lastChildFill && isLastChild;
-  return {
-    dock,
-    className: shouldFill ? 'should-fill' : '',
-  };
-};
-
-/**
- * Wrap each child in a nested container, like so:
+ * Wrap each child in a container in its parent, nested recursively.
  *
  * + Child 0 container
  *   |
- *   +- Child 0
+ *   + - Child 0
  *   |
- *   +- Child 1 container
+ *   + - Child 1 container
  *      |
- *      +- Child 1
+ *      + - Child 1
  *
- *         ...etc...
+ *          ...etc...
  */
-const wrapChildrenInNestedContainers = ({
-  dockProps,
-  children,
-}: DockChildWrappingInfo) => {
-  const dockChildContainerProps = calculateDockChildContainerProps({
-    dockProps,
-    children,
-  });
-  return (
-    <DockChildDiv {...dockChildContainerProps}>
-      {children[0]}
-      {children.length > 1
-        ? wrapChildrenInNestedContainers({
-            dockProps,
-            children: children.slice(1),
-          })
-        : undefined}
-    </DockChildDiv>
-  );
-};
+const wrapChildrenInNestedContainers = (props: DockProps) => (
+  <StyledDockChildDiv dockProps={props} dockChildren={props.children}>
+    {props.children[0]}
+    {props.children.length > 1
+      ? wrapChildrenInNestedContainers({
+          ...props,
+          children: props.children.slice(1),
+        })
+      : undefined}
+  </StyledDockChildDiv>
+);
+
+export const DockChild = (props: DockChildProps) => <>{props.children}</>;
 
 /**
  * A container in which each child gravitates to one of its four edges.
  */
-export const Dock = (props: DockProps) => {
-  const { children, lastChildFill, ...dockProps } = props;
-  return (
-    <div {...dockProps}>
-      {wrapChildrenInNestedContainers({
-        dockProps: { lastChildFill, ...dockProps },
-        children: React.Children.toArray(children),
-      })}
-    </div>
-  );
-};
+export const Dock = (props: DockProps) => wrapChildrenInNestedContainers(props);

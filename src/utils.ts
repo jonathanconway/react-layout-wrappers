@@ -1,7 +1,7 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import { ReactElement } from 'react';
 
-import { SequenceWrapperProps } from './types';
+import { SequenceWrapperProps, WrapperChildProps } from './types';
 
 export const createFlexDirectionCalculator = (
   defaultProps: SequenceWrapperProps
@@ -11,11 +11,12 @@ export const createFlexDirectionCalculator = (
     : (props.direction || defaultProps.direction) === 'right-to-left'
       ? 'row-reverse'
       : 'row';
+
 /**
  * Put keys and ids on all the elements
  */
 export const addKeysAndIdsWithPrefixToElements = (prefix: string) => (
-  elements: ReadonlyArray<ReactElement<HTMLProps<HTMLElement>>>
+  elements: ReadonlyArray<ReactElement<WrapperChildProps>>
 ) =>
   elements.map((element, index) =>
     React.cloneElement(element, {

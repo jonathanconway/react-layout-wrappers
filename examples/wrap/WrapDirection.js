@@ -1,10 +1,12 @@
 import React from 'react';
-import { Wrap } from 'react-layout';
+import { Wrap, WrapChild } from 'react-layout';
 
 const WrapDirection = () => (
   <Wrap direction="right-to-left">
-    {[...Array(100).keys()].map(i =>
-      <span key={i}>{i}</span>
+    {Array(100).fill().map((_, i) =>
+      <WrapChild>
+        <span key={i}>{i}</span>
+      </WrapChild>
     )}
   </Wrap>
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wrap } from 'react-layout';
+import { Wrap, WrapChild } from 'react-layout';
 
 const styles = {
   container: {
@@ -7,18 +7,21 @@ const styles = {
   },
 };
 
+const wrapFakeChildren =
+  Array(50).fill(null).map((_, i) =>
+    <WrapChild>
+      <span key={i}>{i}</span>
+    </WrapChild>
+  );
+
 const WrapVertical = () => (
   <div>
     <Wrap style={styles.container} orientation="vertical">
-      {[...Array(50).keys()].map(i =>
-        <span key={i}>{i}</span>
-      )}
+      {wrapFakeChildren}
     </Wrap>
 
     <Wrap style={styles.container} orientation="vertical" direction="right-to-left">
-      {[...Array(50).keys()].map(i =>
-        <span key={i}>{i}</span>
-      )}
+      {wrapFakeChildren}
     </Wrap>
   </div>
 );

@@ -2,21 +2,20 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import 'jest-styled-components';
 
-import { UniformGrid } from '../src';
+import { UniformGrid, UniformGridChild } from '../src';
 
 describe('A <UniformGrid />', () => {
   describe('with children and no other props set', () => {
     it('renders all the children, one after another', () => {
       const tree = mount(
         <UniformGrid rows={2} columns={4}>
-          <button>Btn1</button>
-          <button>Btn2</button>
-          <button>Btn3</button>
-          <button>Btn4</button>
-          <button>Btn5</button>
-          <button>Btn6</button>
-          <button>Btn7</button>
-          <button>Btn8</button>
+          {Array(8)
+            .fill(null)
+            .map((_, i) => (
+              <UniformGridChild key={i}>
+                <button>Btn {i + 1}</button>
+              </UniformGridChild>
+            ))}
         </UniformGrid>
       );
       expect(tree).toHaveStyleRule('display', 'grid');

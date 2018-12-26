@@ -1,18 +1,21 @@
 import React from 'react';
-import { Stack } from 'react-layout';
+import { Stack, StackChild } from 'react-layout';
+
+const stackFakeChildren =
+  Array(3).fill(null).map((_, i) =>
+    <StackChild>
+      <button>Button {i + 1}</button>
+    </StackChild>
+  );
 
 const StackDirection = () => (
   <div>
     <Stack orientation="horizontal" direction="left-to-right">
-      <button>Button 1</button>
-      <button>Button 2</button>
-      <button>Button 3</button>
+      {stackFakeChildren}
     </Stack>
 
     <Stack orientation="horizontal" direction="right-to-left">
-      <button>Button 1</button>
-      <button>Button 2</button>
-      <button>Button 3</button>
+      {stackFakeChildren}
     </Stack>
   </div>
 );

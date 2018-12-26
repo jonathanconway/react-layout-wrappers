@@ -1,11 +1,17 @@
 import React from 'react';
-import { Stack } from 'react-layout';
+import { Stack, StackChild } from 'react-layout';
 
 const StackHorizontal = () => (
   <Stack orientation="horizontal" style={{ height: '50px' }}>
-    <span>Text</span>
-    <button>Button 1</button>
-    <button>Button 2</button>
+    <StackChild>
+      <span>Text</span>
+    </StackChild>
+    <StackChild>
+      <button>Button 1</button>
+    </StackChild>
+    <StackChild>
+      <button>Button 2</button>
+    </StackChild>
   </Stack>
 );
 

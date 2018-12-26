@@ -1,17 +1,12 @@
 import * as React from 'react';
-import { ReactChild, ReactElement, HTMLProps } from 'react';
 import styled from 'styled-components';
 
-import { WrapperProps } from './types';
-import {
-  addKeysAndIdsWithPrefixToElements,
-  formatSpacingValue,
-  valueOrDefault,
-} from './utils';
+import { WrapperProps, WrapperChildProps } from './types';
+import { formatSpacingValue, valueOrDefault } from './utils';
 
-export interface GridProps extends WrapperProps {
-  readonly rowDefinitions: ReadonlyArray<GridRowDefinition>;
-  readonly columnDefinitions: ReadonlyArray<GridColumnDefinition>;
+export interface GridProps extends WrapperProps<GridChildProps> {
+  readonly rowDefinitions?: ReadonlyArray<GridRowDefinition>;
+  readonly columnDefinitions?: ReadonlyArray<GridColumnDefinition>;
 }
 
 export interface GridRowDefinition {
@@ -22,100 +17,60 @@ export interface GridColumnDefinition {
   readonly width?: number | string;
 }
 
-export interface GridChildProps extends HTMLProps<HTMLElement> {
+export interface GridChildProps extends WrapperChildProps {
   readonly gridRow?: number;
   readonly gridColumn?: number;
   readonly gridRowSpan?: number;
   readonly gridColumnSpan?: number;
 }
 
-type GridChild = ReactElement<GridChildProps>;
-
-interface GridDivProps {
-  readonly gridProps: GridProps;
-  readonly elements: ReadonlyArray<GridChild>;
-}
+// TODO: merge these in to StyledGridDiv
 
 const valueOr1Fr = valueOrDefault('1fr');
 
 const mapDefinitionSize = (size?: number | string) =>
   valueOr1Fr(formatSpacingValue(size));
 
-const getDefinitionSize = (dimension: 'row' | 'column', props: GridDivProps) =>
+const getDefinitionSize = (dimension: 'row' | 'column', props: GridProps) =>
   dimension === 'row'
-    ? (props.gridProps.rowDefinitions || []).map(d => d.height)
+    ? (props.rowDefinitions || []).map(d => d.height)
     : dimension === 'column'
-      ? (props.gridProps.columnDefinitions || []).map(d => d.width)
+      ? (props.columnDefinitions || []).map(d => d.width)
       : [];
 
 const generateGridTemplateUnit = (dimension: 'row' | 'column') => (
-  props: GridDivProps
+  props: GridProps
 ) =>
   getDefinitionSize(dimension, props)
     .map(mapDefinitionSize)
     .join(' ');
 
-const childPrefix = 'grid-child';
-
-/**
- * Generate styles needed to implement gridRowSpan and gridColumnSpan.
- */
-const generateRowColumnSpanStyles = (props: GridDivProps) =>
-  props.elements
-    .filter(
-      element =>
-        element.props.gridRow !== undefined &&
-        element.props.gridColumn !== undefined
-    )
-    .map(
-      (element, index) => `
-      #${childPrefix}-${index} {
-        grid-row-start: ${element.props.gridRow!};
-        grid-row-end: ${element.props.gridRow! +
-          (element.props.gridRowSpan || 0)};
-        grid-column-start: ${element.props.gridColumn!};
-        grid-column-end: ${element.props.gridColumn! +
-          (element.props.gridColumnSpan || 0)};
-      }
-    `
-    )
-    .join('');
-
-const GridDiv = styled.div`
+const StyledGridDiv = styled.div`
   display: grid;
   grid-template-rows: ${generateGridTemplateUnit('row')};
   grid-template-columns: ${generateGridTemplateUnit('column')};
 
-  ${generateRowColumnSpanStyles};
+  ${(props: GridProps) =>
+    props.children
+      .map(
+        (child, index) => `
+        & > *:nth-child(${index + 1}) {
+          grid-row-start: ${child.props.gridRow!};
+          grid-row-end: ${child.props.gridRow! +
+            (child.props.gridRowSpan || 0)};
+          grid-column-start: ${child.props.gridColumn!};
+          grid-column-end: ${child.props.gridColumn! +
+            (child.props.gridColumnSpan || 0)};
+        }`
+      )
+      .join('')};
 `;
 
-/**
- * Put keys and ids on all the elements
- */
-const addKeysAndIdsToElements = addKeysAndIdsWithPrefixToElements(childPrefix);
-
-/**
- * From all the children, return only GridChildElement elements.
- */
-const getGridChildElements = (children: ReadonlyArray<ReactChild>) =>
-  children
-    .map(gridChild => gridChild as GridChild)
-    .filter(x => !!x)
-    .map(gridChild => gridChild);
+export const GridChild = (props: GridChildProps) => <>{props.children}</>;
 
 /**
  * A container that slots its children into cells, defined by rows and columns.
  */
-export const Grid = ({ children, ...props }: GridProps) => {
-  const elementsToRender = addKeysAndIdsToElements(
-    getGridChildElements(React.Children.toArray(children) as ReadonlyArray<
-      ReactChild
-    >)
-  );
-
-  return (
-    <GridDiv gridProps={props} elements={elementsToRender}>
-      {elementsToRender}
-    </GridDiv>
-  );
-};
+export const Grid = (props: GridProps) => (
+  <StyledGridDiv {...props}>{props.children}</StyledGridDiv>
+);

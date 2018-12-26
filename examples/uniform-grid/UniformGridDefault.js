@@ -1,16 +1,13 @@
 import React from 'react';
-import { UniformGrid } from 'react-layout';
+import { UniformGrid, UniformGridChild } from 'react-layout';
 
 const UniformGridDefault = () => (
   <UniformGrid rows={2} columns={4}>
-    <span>Item1</span>
-    <span>Item2</span>
-    <span>Item3</span>
-    <span>Item4</span>
-    <span>Item5</span>
-    <span>Item6</span>
-    <span>Item7</span>
-    <span>Item8</span>
+    {Array(8).fill(null).map((_, i) =>
+      <UniformGridChild>
+        <span>Item {i + 1}</span>
+      </UniformGridChild>
+    )}
   </UniformGrid>
 );
 

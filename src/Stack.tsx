@@ -1,25 +1,31 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { SequenceWrapperProps, WrapperProps } from './types';
+import { WrapperProps, WrapperChildProps, SequenceWrapperProps } from './types';
 import { createFlexDirectionCalculator } from './utils';
 
-export interface StackProps extends WrapperProps, SequenceWrapperProps {}
+export interface StackProps
+  extends WrapperProps<StackChildProps>,
+    SequenceWrapperProps {}
 
-const defaultProps: StackProps = {
+export interface StackChildProps extends WrapperChildProps {}
+
+const defaultSequenceProps: SequenceWrapperProps = {
   orientation: 'vertical',
   direction: 'left-to-right',
 };
 
-const calculateFlexDirection = createFlexDirectionCalculator(defaultProps);
+const calculateFlexDirection = createFlexDirectionCalculator(
+  defaultSequenceProps
+);
 
-const calculateWidthOrHeightSetting = (props: StackProps) =>
+const calculateWidthOrHeightSetting = (props: SequenceWrapperProps) =>
   ({
     horizontal: 'height: 100%;',
     vertical: 'width: 100%;',
-  }[props.orientation || defaultProps.orientation!]);
+  }[props.orientation || defaultSequenceProps.orientation!]);
 
-const StackDiv = styled.div`
+const StyledStackDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: ${calculateFlexDirection};
@@ -30,9 +36,11 @@ const StackDiv = styled.div`
   }
 `;
 
+export const StackChild = (props: StackChildProps) => <>{props.children}</>;
+
 /**
  * A container that stacks its children next to each other, one after another.
  */
-export const Stack = ({ children, ...props }: StackProps) => (
-  <StackDiv {...props}>{children}</StackDiv>
+export const Stack = (props: StackProps) => (
+  <StyledStackDiv {...props}>{props.children}</StyledStackDiv>
 );

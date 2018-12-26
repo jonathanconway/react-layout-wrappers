@@ -2,28 +2,31 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import 'jest-styled-components';
 
-import { Dock, DockDirection } from '../src';
-import { HTMLProps } from 'react';
-
-const Span = (_: HTMLProps<HTMLSpanElement> & { dock: DockDirection }) => (
-  <span>.</span>
-);
+import { Dock, DockChild } from '../src';
 
 describe('A <Dock />', () => {
   describe('with 4 differently docked children', () => {
     const tree = mount(
       <Dock>
-        <Span id="child-1" dock="top" />
-        <Span id="child-2" dock="right" />
-        <Span id="child-3" dock="bottom" />
-        <Span id="child-4" dock="left" />
+        <DockChild dock="top">
+          <span id="child-1">.</span>
+        </DockChild>
+        <DockChild dock="right">
+          <span id="child-2">.</span>
+        </DockChild>
+        <DockChild dock="bottom">
+          <span id="child-3">.</span>
+        </DockChild>
+        <DockChild dock="left">
+          <span id="child-4">.</span>
+        </DockChild>
       </Dock>
     );
     const wrappers = [
+      tree.find('div'),
       tree.find('div div'),
       tree.find('div div div'),
       tree.find('div div div div'),
-      tree.find('div div div div div'),
     ];
 
     it('renders the children in nested containers', () => {
@@ -46,10 +49,20 @@ describe('A <Dock />', () => {
   });
 
   describe('with lastChildFill set to true', () => {
-    const tree = mount(<Dock lastChildFill={true} />);
+    const tree = mount(
+      <Dock lastChildFill={true}>
+        <DockChild>
+          <span />
+        </DockChild>
+        <DockChild>
+          <span />
+        </DockChild>
+      </Dock>
+    );
+
     it('styles the last child to fill', () => {
-      expect(tree).toHaveStyleRule('flex', '1', {
-        modifier: '&.should-fill > *',
+      expect(tree.find('div div')).toHaveStyleRule('flex', '1', {
+        modifier: '> *',
       });
     });
   });

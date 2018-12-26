@@ -1,15 +1,13 @@
 import React from 'react';
-import { Wrap } from 'react-layout';
+import { Wrap, WrapChild } from 'react-layout';
 
 const WrapDefault = () => (
-  <Wrap>
-    <span>Tag 1</span>
-    <span>Tag 2</span>
-    <span>Tag 3</span>
-    <span>Tag 4</span>
-    <span>Tag 5</span>
-    <span>Tag 6</span>
-    <span>Tag 7</span>
+  <Wrap style={{ width: '200px' }}>
+    {Array(7).fill(null).map((_, i) =>
+      <WrapChild>
+        <span>Tag {i + 1}</span>
+      </WrapChild>
+    )}
   </Wrap>
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dock } from 'react-layout';
+import { Dock, DockChild } from 'react-layout';
 
 const style = {
   'height': '100px',
@@ -7,15 +7,23 @@ const style = {
 };
 
 const DockDefault = () => (
-  <div>
-    <Dock style={style}>
-      <button dock="top">One</button>
-      <button dock="left">Two</button>
-      <button dock="right">Three</button>
-      <button dock="right">Four</button>
-      <button dock="bottom">Five</button>
-    </Dock>
-  </div>
+  <Dock style={style} lastChildFill={true}>
+    <DockChild dock="top">
+      <button>One</button>
+    </DockChild>
+    <DockChild dock="left">
+      <button>Two</button>
+    </DockChild>
+    <DockChild dock="right">
+      <button>Three</button>
+    </DockChild>
+    <DockChild dock="right">
+      <button>Four</button>
+    </DockChild>
+    <DockChild dock="bottom">
+      <button>Five</button>
+    </DockChild>
+  </Dock>
 );
 
 export default DockDefault;
