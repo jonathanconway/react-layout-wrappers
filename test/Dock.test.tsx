@@ -31,19 +31,19 @@ describe('A <Dock />', () => {
     });
 
     it('renders the child wrappers with appropriate styles', () => {
-      expect(tree.find('#dock > div')).toHaveStyleRule(
+      expect(tree.find('#dock div').at(0)).toHaveStyleRule(
         'flex-direction',
         'column'
       );
-      expect(tree.find('#dock > div > div')).toHaveStyleRule(
+      expect(tree.find('#dock div div').at(1)).toHaveStyleRule(
         'flex-direction',
         'row-reverse'
       );
-      expect(tree.find('#dock > div > div > div')).toHaveStyleRule(
+      expect(tree.find('#dock div div div').at(1)).toHaveStyleRule(
         'flex-direction',
         'column-reverse'
       );
-      expect(tree.find('#dock > div > div > div > div')).toHaveStyleRule(
+      expect(tree.find('#dock div div div div').at(1)).toHaveStyleRule(
         'flex-direction',
         'row'
       );
