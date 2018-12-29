@@ -1,13 +1,8 @@
 import React from 'react';
 import { Dock, DockChild } from 'react-layout';
 
-const style = {
-  'height': '100px',
-  'margin-bottom': '20px'
-};
-
 const DockDefault = () => (
-  <Dock style={style} lastChildFill={true}>
+  <Dock style={{ height: '100px', marginBottom: '20px' }}>
     <DockChild dock="top">
       <button>One</button>
     </DockChild>

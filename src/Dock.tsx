@@ -77,4 +77,8 @@ export const DockChild = (props: DockChildProps) => <>{props.children}</>;
 /**
  * A container in which each child gravitates to one of its four edges.
  */
-export const Dock = (props: DockProps) => wrapChildrenInNestedContainers(props);
+export const Dock = ({ lastChildFill, ...props }: DockProps) => (
+  <div {...props}>
+    {wrapChildrenInNestedContainers({ lastChildFill, ...props })}
+  </div>
+);
