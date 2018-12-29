@@ -148,7 +148,7 @@ describe('A <Grid />', () => {
         { height: 20 },
         { height: 30 },
         { height: 40 },
-        { height: 50 },
+        { height: '50%' },
       ],
       columnDefinitions: [
         { width: 20 },
@@ -174,7 +174,7 @@ describe('A <Grid />', () => {
       </Grid>
     );
     it('renders the grid with correct styles', () => {
-      expect(tree).toHaveStyleRule('grid-template-rows', '20px 30px 40px 50px');
+      expect(tree).toHaveStyleRule('grid-template-rows', '20px 30px 40px 50%');
       expect(tree).toHaveStyleRule(
         'grid-template-columns',
         '20px 30px 40px 50px'

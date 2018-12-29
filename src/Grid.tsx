@@ -24,19 +24,15 @@ export interface GridChildProps extends WrapperChildProps {
   readonly gridColumnSpan?: number;
 }
 
-// TODO: merge these in to StyledGridDiv
-
-const valueOr1Fr = valueOrDefault('1fr');
-
-const mapDefinitionSize = (size?: number | string) =>
-  valueOr1Fr(formatSpacingValue(size));
-
 const getDefinitionSize = (dimension: 'row' | 'column', props: GridProps) =>
   dimension === 'row'
     ? (props.rowDefinitions || []).map(d => d.height)
     : dimension === 'column'
       ? (props.columnDefinitions || []).map(d => d.width)
       : [];
+
+const mapDefinitionSize = (size?: number | string) =>
+  valueOrDefault('1fr')(formatSpacingValue(size));
 
 const generateGridTemplateUnit = (dimension: 'row' | 'column') => (
   props: GridProps

@@ -32,9 +32,7 @@ export const addKeysAndIdsWithPrefixToElements = (prefix: string) => (
  * @param value Value to convert
  */
 export const formatSpacingValue = (value?: number | string) =>
-  !!value
-    ? isNaN(parseInt(value.toString(), 10)) ? value : `${value}px`
-    : undefined;
+  !!value ? (isNaN(Number(value)) ? value : `${value}px`) : undefined;
 
 export const valueOrDefault = (defaultValue: string) => (value?: {}) =>
-  value === undefined ? defaultValue : value;
+  value === undefined || value === null ? defaultValue : value;
