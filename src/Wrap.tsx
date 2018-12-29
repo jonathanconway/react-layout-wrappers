@@ -15,11 +15,15 @@ const calculateFlexDirection = createFlexDirectionCalculator({
   direction: 'left-to-right',
 });
 
-const calculateFlexWrap = (props: WrapProps) =>
-  ({
-    'left-to-right': 'wrap',
-    'right-to-left': 'wrap-reverse',
-  }[props.direction || 'left-to-right']);
+const calculateFlexWrap = (props: WrapProps) => {
+  if (props.orientation === 'vertical') {
+    return {
+      'left-to-right': 'wrap',
+      'right-to-left': 'wrap-reverse',
+    }[props.direction || 'left-to-right'];
+  }
+  return 'wrap';
+};
 
 const StyledWrapDiv = styled.div`
   display: flex;
